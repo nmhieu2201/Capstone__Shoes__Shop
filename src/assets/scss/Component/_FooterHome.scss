@@ -1,0 +1,155 @@
+@import '../Themes/mixin';
+@import '../Themes/variable';
+
+.footer {
+    .top {
+        padding: 30px;
+        background-color: $bg-4th;
+
+        @include Responsive($SM) {
+            padding-bottom: 0;
+        }
+    }
+
+    .container {
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+
+            @include Responsive($SM) {
+                display: block;
+            }
+
+            .top-item {
+                h4 {
+                    @include text($text-fz-xl, $text-fw-semibold, $text-color-primary);
+                    margin-bottom: 20px;
+                    text-transform: uppercase;
+                }
+
+                ul {
+                    padding-left: 0;
+
+                    li {
+                        list-style-type: none;
+                        margin-bottom: 10px;
+
+                        a {
+                            text-decoration: none;
+                            @include text($text-fz-sm, $text-fw-light, $text-color-primary);
+
+                            &:hover {
+                                color: $text-color-5th;
+                            }
+                        }
+                    }
+                }
+
+                @include Responsive($SM) {
+                    border: none;
+                    padding: 0;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .top-item:nth-child(2) {
+                padding-left: 40px;
+                border-left: 1px solid #cbc9c9;
+
+                @include Responsive($SM) {
+                    border: none;
+                    padding: 0;
+                }
+            }
+
+            .item-register {
+                padding-left: 40px;
+                border-left: 1px solid #cbc9c9;
+
+                h4 {
+                    @include text($text-fz-xl, $text-fw-semibold, $text-color-primary);
+                    margin-bottom: 20px;
+                    text-transform: uppercase;
+                }
+
+                .des {
+                    @include text($text-fz-sm, $text-fw-light, $text-color-primary);
+                    margin-bottom: 10px;
+                }
+
+                a {
+                    @include text($text-fz-sm, $text-fw-light, $text-color-5th);
+                    text-decoration: none;
+                }
+
+                @include Responsive($SM) {
+                    border: none;
+                    padding: 0;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+
+    .bottom {
+        padding: 30px;
+        background-color: $bg-primary;
+
+        .container {
+            .row {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+
+                @include Responsive($SM) {
+                    display: block;
+                }
+
+                .bottom-item {
+                    @include Responsive($SM) {
+                        border: none;
+                        padding: 0;
+                        margin-bottom: 20px;
+                    }
+
+                    h4 {
+                        @include text($text-fz-xl, $text-fw-semibold, $text-color-primary);
+                        margin-bottom: 20px;
+                        text-transform: uppercase;
+                    }
+
+                    p {
+                        @include text($text-fz-sm, $text-fw-light, $text-color-primary);
+                        margin-bottom: 10px;
+                    }
+
+                    a {
+                        @include text($text-fz-sm, $text-fw-light, $text-color-5th);
+                        text-decoration: none;
+                    }
+                }
+
+                .bottom-item:nth-child(2) {
+                    padding-left: 40px;
+                    border-left: 1px solid #cbc9c9;
+
+                    @include Responsive($SM) {
+                        border: none;
+                        padding: 0;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                .bottom-item:nth-child(3) {
+                    padding-left: 40px;
+                    border-left: 1px solid #cbc9c9;
+
+                    @include Responsive($SM) {
+                        border: none;
+                        padding: 0;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
