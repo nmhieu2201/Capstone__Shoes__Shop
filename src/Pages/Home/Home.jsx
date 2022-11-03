@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="home-component">
       <div className="carousel-home">
-        <CarouselHome />
+        <CarouselHome className="slider" />
       </div>
       <div className="product-feature">
         <h3>Product Feature</h3>

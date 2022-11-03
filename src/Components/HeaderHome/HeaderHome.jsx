@@ -1,7 +1,41 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCartOutlined, SearchOutlined } from "@ant-design/icons";
+import { ACCESSTOKEN, settings, USER_LOGIN } from "../../util/config";
+import { useSelector } from "react-redux";
 export default function HeaderHome() {
+  const { listShoes } = useSelector((state) => state.cartReducer);
+  const { userProfile } = useSelector((state) => state.userReducer);
+  const renderLogin = () => {
+    console.log(userProfile);
+    if (userProfile) {
+      return (
+        <div className="d-flex">
+          <NavLink className="nav-link" to="/profile">
+            Hello ! {userProfile.name}
+          </NavLink>
+          <button
+            className="nav-link btn btn-primary"
+            style={{ background: "#fff", border: "none" }}
+            onClick={() => {
+              settings.eraseCookie(ACCESSTOKEN, 0);
+              localStorage.removeItem(USER_LOGIN);
+              localStorage.removeItem(ACCESSTOKEN);
+              //Sau khi đăng xuất xong chuyển về trang login đồng thời reload lại page clear redux
+              window.location.href = "/login";
+            }}
+          >
+            Đăng xuất
+          </button>
+        </div>
+      );
+    }
+    return (
+      <NavLink className="nav-link" to="/login">
+        Login
+      </NavLink>
+    );
+  };
   return (
     <header className="header">
       <div className="top">
@@ -13,28 +47,30 @@ export default function HeaderHome() {
             <div className="search">
               <span>
                 {" "}
-                <SearchOutlined />
-                Search
+                <NavLink to="/search">
+                  <SearchOutlined />
+                  Search
+                </NavLink>
               </span>
             </div>
             <div className="cart-shop">
               <span className="cart-shop">
-                <ShoppingCartOutlined />
-                (1)
+                <NavLink to="/cart">
+                  <ShoppingCartOutlined />
+                  {listShoes ? `(${listShoes.length})` : {}}
+                </NavLink>
               </span>
             </div>
-            <div className="login">
-              <NavLink to="/login">Login</NavLink>
-            </div>
+            <div className="login">{renderLogin()}</div>
             <div className="register">
-              <NavLink to="">Register </NavLink>
+              <NavLink to="/register">Register </NavLink>
             </div>
           </div>
         </div>
       </div>
       <div className="navbar-bottom">
         <div className="container">
-          <NavLink to="">Home</NavLink>
+          <NavLink to="/">Home</NavLink>
           <NavLink to="">Men</NavLink>
           <NavLink to="">Woman</NavLink>
           <NavLink to="">Kid</NavLink>

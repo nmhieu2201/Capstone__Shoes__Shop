@@ -1,26 +1,56 @@
-import { Carousel } from 'antd';
-import React from 'react';
+import { Carousel } from "antd";
+import React from "react";
 const contentStyle = {
-  height: '600px',
-  color: '#fff',
-  lineHeight: '600px',
-  textAlign: 'center',
-  background: '#364d79',
+  height: "600px",
+  background: "#f5f5f5",
 };
 const CarouselHome = () => {
   const onChange = (currentSlide) => {
     console.log(currentSlide);
   };
   return (
-    <Carousel afterChange={onChange}>
+    <Carousel  afterChange={onChange} className="slider" autoplay={true}>
       <div>
-        <h3 style={contentStyle}>1</h3>
+        <div style={contentStyle}>
+          <div className="container">
+            <div className="img">
+              <img src="./img/item1.png" alt="" />
+            </div>
+            <div className="content">
+              <h3 className="name">Product Name</h3>
+              <p className="des">Product description....</p>
+              <button className="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div>
-        <h3 style={contentStyle}>2</h3>
+        <div style={contentStyle}>
+          <div className="container">
+            <div className="img">
+              <img src="./img/item1.png" alt="" />
+            </div>
+            <div className="content">
+              <h3 className="name">Product Name</h3>
+              <p className="des">Product description....</p>
+              <button className="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div>
-        <h3 style={contentStyle}>3</h3>
+        <div style={contentStyle}>
+          <div className="container">
+            <div className="img">
+              <img src="./img/item1.png" alt="" />
+            </div>
+            <div className="content">
+              <h3 className="name">Product Name</h3>
+              <p className="des">Product description....</p>
+              <button className="btn-buy">Buy Now</button>
+            </div>
+          </div>
+        </div>
       </div>
     </Carousel>
   );

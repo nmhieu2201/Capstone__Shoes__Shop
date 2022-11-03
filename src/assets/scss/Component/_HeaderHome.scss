@@ -28,13 +28,10 @@
 
                     span {
                         @include text ($text-fz-2xl, $text-fw-light, $text-color-3nd);
-                        vertical-align: baseline;
-
-                        &:hover {
-                            color: #f6b653;
-                            cursor: pointer;
-                            transition: all 0.5s;
+                        a {
+                            color: $text-color-3nd;
                         }
+                        vertical-align: baseline;
                     }
 
                 }
@@ -47,11 +44,8 @@
                     span {
                         @include text ($text-fz-2xl, $text-fw-light, $text-color-3nd);
                         vertical-align: baseline;
-
-                        &:hover {
-                            color: #f6b653;
-                            cursor: pointer;
-                            transition: all 0.5s;
+                        a{
+                            color: $text-color-3nd;
                         }
                     }
 

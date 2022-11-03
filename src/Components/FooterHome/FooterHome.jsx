@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 export default function FooterHome() {
   return (
     <footer className="footer">
@@ -11,63 +10,55 @@ export default function FooterHome() {
               <h4>Get Help</h4>
               <ul>
                 <li>
-                  <NavLink to="">Contact Us</NavLink>
+                  <NavLink to="/">Home</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">Shopping</NavLink>
+                  <NavLink to="">Nike</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">NikeId</NavLink>
+                  <NavLink to="">Adidas</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">Nike+</NavLink>
+                  <NavLink to="">Contact+</NavLink>
                 </li>
               </ul>
             </div>
             <div className="top-item">
-              <h4>Orders</h4>
+              <h4>Support</h4>
               <ul>
                 <li>
-                  <NavLink to="">Payment Optins</NavLink>
+                  <NavLink to="">About</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">Shipping anh delivery</NavLink>
+                  <NavLink to="">Contact</NavLink>
                 </li>
                 <li>
-                  <NavLink to="">Returns</NavLink>
+                  <NavLink to="">Help</NavLink>
+                </li>
+                <li>
+                  <NavLink to="">Phone</NavLink>
                 </li>
               </ul>
             </div>
             <div className="item-register">
               <h4>Register</h4>
-              <p className="des">
-                Create one account to manage everything you do with Nike, from
-                your shopping preferences to your Nike + activity
-              </p>
-              <NavLink to="">Learn More</NavLink>
+              <ul>
+                <li>
+                  <NavLink to="/register">Register</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/login">Login</NavLink>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
       <div className="bottom">
         <div className="container">
-          <div className="row">
-            <div className="bottom-item">
-              <h4>Email Sign Up</h4>
-              <p>Be the first to know about new products and special others.</p>
-              <NavLink to="">Sign Up Now</NavLink>
-            </div>
-            <div className="bottom-item">
-              <h4>Gift Cards</h4>
-              <p>Give the gifts that always fits</p>
-              <NavLink to="">View Card</NavLink>
-            </div>
-            <div className="bottom-item">
-              <h4>Store near you</h4>
-              <p>Locate the Nike retail store or authorized retailer</p>
-              <NavLink to="">Search</NavLink>
-            </div>
-          </div>
+          <h4 className="text-center coppy-right">
+            ©2022 CyberSoft All Rights Reserved | Design Theme By Trương Tấn Khải
+          </h4>
         </div>
       </div>
     </footer>

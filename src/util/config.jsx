@@ -1,5 +1,7 @@
 import axios from "axios";
 import { history } from "../index";
+export const USER_LOGIN = "userLogin";
+export const ACCESSTOKEN = "accessToken";
 export const settings = {
   setStorageJson: (name, data) => {
     data = JSON.stringify(data);
@@ -78,6 +80,7 @@ http.interceptors.request.use(
     config.headers = {
       ...config.headers,
       TokenCyberSoft: TOKEN_CYBERSOFT,
+      Authorization: "Bearer " + settings.getStorage(ACCESSTOKEN),
     };
     return config;
   },
@@ -92,6 +95,14 @@ http.interceptors.response.use(
   },
   (error) => {
     console.log(error);
+    if (error.response?.status === 401) {
+      // window.location.href = '/login';
+      //Chuyển hướng trang mà không cần reload lại trang để giữ được các state hiện tại trên redux
+      history.push("/login");
+    }
+    if (error.response?.status === 400 || error.response?.status === 400) {
+      history.push("/");
+    }
     return Promise.reject(error);
   }
 );

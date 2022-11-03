@@ -4,7 +4,58 @@
 .home-component {
     padding: 120px 0;
 
-    .carousel-home {}
+    .carousel-home {
+        .slider {
+            .slick-dots li {
+                margin: 0 10px;
+            }
+
+            .slick-dots li.slick-active button,
+            .slick-dots li button {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: $bg-3nd;
+            }
+
+            .slick-dots li.slick-active button {
+                background-color: #F21299;
+            }
+
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 600px;
+
+                .img {
+                    width: 70%;
+                    padding: 100px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .content {
+                    width: 30%;
+
+                    .name {
+                        @include text($text-fz-4xl, $text-fw-regular, $text-color-primary)
+                    }
+
+                    .des {
+                        @include text($text-fz-2xl, $text-fw-regular, $text-color-primary)
+                    }
+
+                    .btn-buy {
+                        @include button($text-fz-2xxl, $text-fw-light, $text-color-primary, $bg-6th, 10px 30px, none, 0, $text-color-3nd, $bg-3nd, none);
+
+                    }
+                }
+            }
+        }
+    }
 
     .product-feature {
         padding: 50px 0;

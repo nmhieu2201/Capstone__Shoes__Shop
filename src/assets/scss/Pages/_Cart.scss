@@ -16,7 +16,12 @@
             .table {
                 thead {
                     tr {
+                        line-height: 50px;
                         td {
+                            input {
+                                background-color: #002B4E !important;
+                                color: white;
+                            }
                             padding: 20px;
 
                             :first-child {
