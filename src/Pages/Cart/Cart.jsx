@@ -1,15 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   decreaseQuantity,
   removeFromCart,
-  addShoesAction,
+  addShoesAction
 } from "../../redux/cartReducer/cartReducer";
 
 export default function Cart() {
-  const navigate = useNavigate();
   const { listShoes } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
   const handleOrder = async () => {
@@ -22,7 +20,6 @@ export default function Cart() {
       alert(result.data.message);
     } catch (err) {
       alert(err.message);
-      navigate("/detail");
     }
   };
   return (

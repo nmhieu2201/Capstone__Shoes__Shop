@@ -8,7 +8,7 @@ export default function HeaderHome() {
   const { userProfile } = useSelector((state) => state.userReducer);
   const renderLogin = () => {
     console.log(userProfile);
-    if (userProfile) {
+    if (userProfile.name) {
       return (
         <div className="d-flex">
           <NavLink className="nav-link" to="/profile">

@@ -31,6 +31,7 @@ export const loginApi = (user) => {
   return async (dispatch) => {
     const result = await http.post("/api/users/signin", user);
     const action = loginAction(result.data.content);
+    console.log(result.data.message);
     await dispatch(action);
     history.push("/proifle");
     const actionGetProfile = getProfileAction();
@@ -54,7 +55,7 @@ export const loginFacebookApi = (tokenFBApp) => {
     });
     const action = await loginAction(result.data.content);
     dispatch(action);
-    const actionGetProfile = getProfileAction(result.data.content);
+    const actionGetProfile = await getProfileAction(result.data.content);
     dispatch(actionGetProfile);
     settings.setStorageJson(USER_LOGIN, result.data.content);
 

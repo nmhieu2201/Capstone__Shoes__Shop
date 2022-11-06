@@ -11,9 +11,8 @@ export default function LoginFacebook() {
       <FacebookLogin
         appId="513423747312714"
         className='w-100 content'
-        // autoLoad={true}
+        autoLoad={true}
         fields="name,email,picture"
-        // onClick={componentClicked}
         callback={responseFacebook}
         render={(renderProps) => (
           <button onClick={renderProps.onClick} className="btn-facebook btn btn-primary w-100">

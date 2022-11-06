@@ -3,14 +3,19 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { addItemToCart } from "../../redux/cartReducer/cartReducer";
 import {
-  addShoesAction,
+  getProduceDetailApiById,
+  addQuantityAction,
   decreaseQuantity,
-} from "../../redux/cartReducer/cartReducer";
-import { getProduceDetailApiById } from "../../redux/productReducer/productReducer";
+} from "../../redux/productReducer/productReducer";
 export default function Detail() {
   const { productDetail } = useSelector((state) => state.productReducer);
-  const { listShoes } = useSelector((state) => state.cartReducer);
+  console.log(
+    "useSelector((state) => state.productReducer)",
+    useSelector((state) => state.productReducer)
+  );
+  console.log(productDetail);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
@@ -22,7 +27,7 @@ export default function Detail() {
       <div className="product-cart">
         <div className="container">
           <div className="img">
-            <img src={productDetail.image} alt="" />
+            <img src={productDetail.image} alt="..." />
           </div>
           <div className="item-info">
             <h1 className="name">{productDetail.name}</h1>
@@ -40,12 +45,12 @@ export default function Detail() {
               <span
                 className="plus"
                 onClick={() => {
-                  dispatch(addShoesAction(productDetail));
+                  dispatch(addQuantityAction(productDetail));
                 }}
               >
                 +
               </span>
-              <span className="quantity">{listShoes.cartQuantity}</span>
+              <span className="quantity">{productDetail.cartQuantity}</span>
               <span
                 className="minus"
                 onClick={() => {
@@ -58,7 +63,7 @@ export default function Detail() {
             <button
               className="btn-addtocart"
               onClick={() => {
-                const action = addShoesAction(productDetail);
+                const action = addItemToCart(productDetail);
                 dispatch(action);
               }}
             >

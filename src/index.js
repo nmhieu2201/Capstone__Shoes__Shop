@@ -19,6 +19,7 @@ import Search from "./Pages/Search/Search";
 import Profile from "./Pages/Profile/Profile";
 import Detail from "./Pages/Detail/Detail";
 import Cart from "./Pages/Cart/Cart";
+import UserTemplate from "./Template/UserTemplate/UserTemplate";
 export const history = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,10 +32,15 @@ root.render(
           <Route path="register" element={<Register />}></Route>
           <Route path="search" element={<Search />}></Route>
           <Route path="profile" element={<Profile />}></Route>
-          <Route path='cart' element={<Cart />}></Route>
+          <Route path="cart" element={<Cart />}></Route>
           <Route path="detail">
             <Route path=":id" element={<Detail />}></Route>
           </Route>
+          <Route path="*" element={<Navigate to="" />}></Route>
+        </Route>
+        <Route path="user" element={<UserTemplate />}>
+          <Route index element={<Login />}></Route>
+          <Route path="register" element={<Register />}></Route>
           <Route path="*" element={<Navigate to="" />}></Route>
         </Route>
       </Routes>

@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { http } from "../../util/config";
 const initialState = {
   arrProduct: [],
-  productDetail: {
-  },
+  productDetail: {},
 };
 
 const productReducer = createSlice({
@@ -14,13 +13,25 @@ const productReducer = createSlice({
       state.arrProduct = action.payload;
     },
     getProductDetailAction: (state, action) => {
-      state.productDetail = action.payload;
+      state.productDetail = { ...action.payload, };
+    },
+    addQuantityAction: (state, action) => {
+      state.productDetail.cartQuantity += 1;
+    },
+    decreaseQuantity: (state, action) => {
+      if (state.productDetail.cartQuantity > 1) {
+        state.productDetail.cartQuantity -= 1;
+      }
     },
   },
 });
 
-export const { getProductApiAction, getProductDetailAction } =
-  productReducer.actions;
+export const {
+  getProductApiAction,
+  getProductDetailAction,
+  addQuantityAction,
+  decreaseQuantity,
+} = productReducer.actions;
 
 export default productReducer.reducer;
 //Async action
@@ -34,6 +45,6 @@ export const getProductApi = () => {
 export const getProduceDetailApiById = (id) => {
   return async (dispatch) => {
     const result = await http.get("api/Product/getbyid?id=" + id);
-    dispatch(getProductDetailAction(result.data.content));
+    dispatch(getProductDetailAction({...result.data.content, cartQuantity: 1}));
   };
 };
