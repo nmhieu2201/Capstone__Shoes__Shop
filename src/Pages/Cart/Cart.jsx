@@ -1,26 +1,19 @@
 import axios from "axios";
 import React from "react";
+import { message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseQuantity,
   removeFromCart,
-  addShoesAction
+  addShoesAction,
+  orderApi,
 } from "../../redux/cartReducer/cartReducer";
 
 export default function Cart() {
   const { listShoes } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-  const handleOrder = async () => {
-    try {
-      let result = await axios({
-        url: "https://shop.cyberlearn.vn/api/Users/order",
-        method: "POST",
-        data: listShoes,
-      });
-      alert(result.data.message);
-    } catch (err) {
-      alert(err.message);
-    }
+  const handleOrder = (item) => {
+    // dispatch(orderApi(item));
   };
   return (
     <div className="cart-shoes">
@@ -102,6 +95,7 @@ export default function Cart() {
                         className="btn-del mx-2"
                         onClick={() => {
                           dispatch(removeFromCart(item));
+                          message.success(`Delete ${item.name} completed!`);
                         }}
                       >
                         Delete
@@ -118,7 +112,7 @@ export default function Cart() {
                   <button
                     className="order"
                     onClick={() => {
-                      handleOrder();
+                      handleOrder(listShoes);
                     }}
                   >
                     Submit Order

@@ -13,7 +13,7 @@ const productReducer = createSlice({
       state.arrProduct = action.payload;
     },
     getProductDetailAction: (state, action) => {
-      state.productDetail = { ...action.payload, };
+      state.productDetail = { ...action.payload };
     },
     addQuantityAction: (state, action) => {
       state.productDetail.cartQuantity += 1;

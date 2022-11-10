@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { message } from "antd";
-import {addShoesAction } from "../../redux/cartReducer/cartReducer";
+import { addItemToCart } from "../../redux/cartReducer/cartReducer";
 import {
   getProduceDetailApiById,
   addQuantityAction,
@@ -12,11 +11,6 @@ import {
 } from "../../redux/productReducer/productReducer";
 export default function Detail() {
   const { productDetail } = useSelector((state) => state.productReducer);
-  console.log(
-    "useSelector((state) => state.productReducer)",
-    useSelector((state) => state.productReducer)
-  );
-  console.log(productDetail);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
@@ -24,36 +18,36 @@ export default function Detail() {
     dispatch(action);
   }, [id, dispatch]);
   return (
-    <div className="detail">
-      <div className="product-cart">
+    <div className="detail-m">
+      <div className="product-cart-m">
         <div className="container">
-          <div className="img">
+          <div className="img-m">
             <img src={productDetail.image} alt="..." />
           </div>
-          <div className="item-info">
-            <h1 className="name">{productDetail.name}</h1>
-            <p className="des">{productDetail.description}</p>
-            <div className="product-size">
+          <div className="item-info-m">
+            <h1 className="name-m">{productDetail.name}</h1>
+            <p className="des-m">{productDetail.description}</p>
+            <div className="product-size-m">
               <h4>Avaiable size</h4>
-              <div className="size">
+              <div className="size-m">
                 {productDetail.size?.map((s, index) => {
                   return <span key={index}>{s}</span>;
                 })}
               </div>
             </div>
-            <div className="cost">{productDetail.price}$</div>
-            <div className="plus-minus">
+            <div className="cost-m">{productDetail.price}$</div>
+            <div className="plus-minus-m">
               <span
-                className="plus"
+                className="plus-m"
                 onClick={() => {
                   dispatch(addQuantityAction(productDetail));
                 }}
               >
                 +
               </span>
-              <span className="quantity">{productDetail.cartQuantity}</span>
+              <span className="quantity-m">{productDetail.cartQuantity}</span>
               <span
-                className="minus"
+                className="minus-m"
                 onClick={() => {
                   dispatch(decreaseQuantity(productDetail));
                 }}
@@ -62,12 +56,10 @@ export default function Detail() {
               </span>
             </div>
             <button
-              className="btn-addtocart"
+              className="btn-addtocart-m"
               onClick={() => {
-                const action = addShoesAction(productDetail);
+                const action = addItemToCart(productDetail);
                 dispatch(action);
-                message.success(`Success added ${productDetail.name} to cart!`)
-
               }}
             >
               Add to cart
@@ -75,28 +67,29 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <div className="product-relate ">
+      <div className="product-relate-m ">
         <h3>- Relate Product -</h3>
         <div className="container">
           {productDetail.relatedProducts?.map((item, index) => {
             return (
-              <div className="product-item" key={index}>
-                <div className="cart-info">
-                  <div className="img">
-                    <img src={item.image} alt="" />
-                  </div>
-                  <div className="name-des">
-                    <p className="name">{item.name}</p>
-                    <p className="des">{item.description}</p>
-                  </div>
+              <div className="product-item-m" key={index}>
+                <div className="img-m">
+                  {" "}
+                  <img src={item.image} alt="..." />
                 </div>
-                <div className="buy-cost">
-                  <NavLink className="btn-buy" to={`/detail/${item.id}`}>
-                    Buy now
-                  </NavLink>
-                  <div className="cost">
-                    <span>{item.price}$</span>
+                <div className="cart-info-m">
+                  <div className="name-des-m">
+                    <p className="name-m">{item.name}</p>
+                    <p className="des-m">
+                      {item.description.length > 75
+                        ? item.description.substr(0, 75) + ""
+                        : item.description}
+                    </p>
+                    <span className="cost-m">{item.price}$</span>
                   </div>
+                  <NavLink className="view-detail-m" to={`/detail/${item.id}`}>
+                    View Detail
+                  </NavLink>
                 </div>
               </div>
             );

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { http, ACCESSTOKEN, settings, USER_LOGIN } from "../../util/config";
 import { history } from "../../index";
+import { message } from "antd";
 const initialState = {
   userLogin: settings.getStorageJson(USER_LOGIN)
     ? settings.getStorage(USER_LOGIN)
@@ -13,54 +14,42 @@ const userReducer = createSlice({
   initialState,
   reducers: {
     loginAction: (state, action) => {
-      let userLogin = action.payload;
-      state.userLogin = userLogin;
+      state.userLogin = action.payload;
     },
-    getProfileAction: (state, action) => {
-      console.log(action.payload);
+    setProfileAction: (state, action) => {
       state.userProfile = action.payload;
     },
   },
 });
 
-export const { loginAction, getProfileAction } = userReducer.actions;
+export const { loginAction, setProfileAction } = userReducer.actions;
 
 export default userReducer.reducer;
 ///async action
-export const loginApi = (user) => {
-  return async (dispatch) => {
-    const result = await http.post("/api/users/signin", user);
-    const action = loginAction(result.data.content);
-    console.log(result.data.message);
-    await dispatch(action);
-    history.push("/proifle");
-    const actionGetProfile = getProfileAction();
-    dispatch(actionGetProfile);
-    settings.setStorage(ACCESSTOKEN, result.data.content.ACCESSTOKEN);
-    settings.setStorageJson(USER_LOGIN, result.data.content);
-    settings.setCookie(ACCESSTOKEN, result.data.content.ACCESSTOKEN, 30);
-  };
+export const loginApi = (userLogin) => async (dispatch) => {
+  const result = await http.post("/api/Users/signin", userLogin);
+  message.success(result.data.content);
+  dispatch(loginAction(result.data.content));
+  dispatch(setProfileAction(result.data.content));
+  history.push("/profile");
+  // history.push("/proifle");
+  // const actionGetProfile = getProfileAction();
+  // dispatch(actionGetProfile);
+  // settings.setStorage(ACCESSTOKEN, result.data.content.ACCESSTOKEN);
+  // settings.setStorageJson(USER_LOGIN, result.data.content);
+  // settings.setCookie(ACCESSTOKEN, result.data.content.ACCESSTOKEN, 30);
 };
-export const getProfileApi = () => {
-  return async (dispatch) => {
-    const result = await http.post("/api/users/profile");
-    const action = getProfileAction(result.data.content);
-    dispatch(action);
-  };
+export const getProfileApi = (data) => async (dispatch) => {
+  const result = await http.post("/api/users/getprofile",data);
+  dispatch(setProfileAction(result.data.content));
 };
-export const loginFacebookApi = (tokenFBApp) => {
+export const loginFacebookApi = (data) => {
   return async (dispatch) => {
-    const result = await http.post("/api/Users/facebooklogin", {
-      facebookToken: tokenFBApp,
-    });
-    const action = await loginAction(result.data.content);
-    dispatch(action);
-    const actionGetProfile = await getProfileAction(result.data.content);
-    dispatch(actionGetProfile);
-    settings.setStorageJson(USER_LOGIN, result.data.content);
-
-    settings.setStorage(ACCESSTOKEN, result.data.content.accessToken);
-
-    settings.setCookie(ACCESSTOKEN, result.data.content.accessToken, 30);
+    dispatch(loginAction(data));
+    dispatch(setProfileAction(data));
+    history.push("/profile");
+    // settings.setStorageJson(USER_LOGIN, result.data.content);
+    // settings.setStorage(ACCESSTOKEN, result.data.content.accessToken);
+    // settings.setCookie(ACCESSTOKEN, result.data.content.accessToken, 30);
   };
 };

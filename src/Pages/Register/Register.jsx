@@ -1,4 +1,4 @@
-import { Button, Radio, Form, Input } from "antd";
+import { Button, Radio, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -31,19 +31,20 @@ export default function Register() {
   const onCheckboxChange = (e) => {
     setCheckNick(e.target.checked);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (values) => {
     try {
-      const values = await form.validateFields();
+      values = await form.validateFields();
       const res = await axios({
         url: "https://shop.cyberlearn.vn/api/Users/signup",
         method: "POST",
         data: values,
       });
-      alert(res.data.message);
+      message.success(res.data.message);
+      values = "";
       navigate("/login");
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
-      alert(errorInfo.message)
+      message.error("Email is registered!");
     }
   };
   return (

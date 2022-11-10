@@ -22,7 +22,7 @@ export const settings = {
       const data = localStorage.getItem(name);
       return data;
     }
-    return;
+    return; //undefined
   },
   setCookieJson: (name, value, days) => {
     var expires = "";
@@ -85,7 +85,6 @@ http.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
     return Promise.reject(error);
   }
 );
@@ -94,10 +93,7 @@ http.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
     if (error.response?.status === 401) {
-      // window.location.href = '/login';
-      //Chuyển hướng trang mà không cần reload lại trang để giữ được các state hiện tại trên redux
       history.push("/login");
     }
     if (error.response?.status === 400 || error.response?.status === 400) {

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { http } from "../../util/config";
 
 const initialState = {
   listShoes: [],
@@ -8,8 +9,8 @@ const cartReducer = createSlice({
   name: "cartReducer",
   initialState,
   reducers: {
-    addItemToCart: (state,action) => {
-      state.listShoes.push(action.payload)
+    addItemToCart: (state, action) => {
+      state.listShoes.push(action.payload);
     },
     addShoesAction: (state, action) => {
       const itemIndex = state.listShoes.findIndex(
@@ -41,12 +42,26 @@ const cartReducer = createSlice({
       );
       state.listShoes = removeItem;
     },
+    orderAction: (state, action) => {
+      state.itemOrder = action.payload;
+    },
   },
 });
 
-export const { addShoesAction, decreaseQuantity, removeFromCart,addItemToCart } =
-  cartReducer.actions;
+export const {
+  addShoesAction,
+  decreaseQuantity,
+  removeFromCart,
+  addItemToCart,
+  orderAction,
+} = cartReducer.actions;
 
 export default cartReducer.reducer;
 
 //async action
+// export const orderApi = () => {
+//   return async (dispatch) => {
+//     const result = await http.post("/api/Users/order");
+//     dispatch(orderAction(result.data.content));
+//   };
+// };

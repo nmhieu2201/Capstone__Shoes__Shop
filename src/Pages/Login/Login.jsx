@@ -22,10 +22,7 @@ export default function Login() {
           "Password is not valid!"
         ),
     }),
-    onSubmit: (values) => {
-      const action = loginApi(values);
-      dispatch(action);
-    },
+    onSubmit: (values) => dispatch(loginApi(values)),
   });
   return (
     <div className="login-form">

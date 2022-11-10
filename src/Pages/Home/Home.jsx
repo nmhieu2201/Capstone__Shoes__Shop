@@ -25,7 +25,7 @@ export default function Home() {
                   <div className="product-item" key={index}>
                     <div className="cart-info">
                       <div className="img">
-                        <img src={p.image} alt="" />
+                        <img src={p.image} alt="..." />
                       </div>
                       <div className="name-des">
                         <p className="name">{p.name}</p>

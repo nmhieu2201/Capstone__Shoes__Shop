@@ -9,7 +9,7 @@ const CarouselHome = () => {
     console.log(currentSlide);
   };
   return (
-    <Carousel  afterChange={onChange} className="slider" autoplay={true}>
+    <Carousel  afterChange={onChange} className="slider" autoplay={false}>
       <div>
         <div style={contentStyle}>
           <div className="container">

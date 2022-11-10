@@ -28,9 +28,11 @@
 
                     span {
                         @include text ($text-fz-2xl, $text-fw-light, $text-color-3nd);
+
                         a {
                             color: $text-color-3nd;
                         }
+
                         vertical-align: baseline;
                     }
 
@@ -44,7 +46,8 @@
                     span {
                         @include text ($text-fz-2xl, $text-fw-light, $text-color-3nd);
                         vertical-align: baseline;
-                        a{
+
+                        a {
                             color: $text-color-3nd;
                         }
                     }
@@ -76,6 +79,10 @@
                 }
 
                 .register {
+                    @include Responsive ($XS) {
+                        display: none;
+                    }
+
                     a {
                         text-decoration: none;
 
@@ -94,6 +101,10 @@
 
     .navbar-bottom {
         padding: 18px 0;
+
+        @include Responsive ($XS) {
+            display: none;
+        }
 
         .container {
             @include Responsive ($XS) {

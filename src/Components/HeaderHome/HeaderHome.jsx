@@ -12,16 +12,15 @@ export default function HeaderHome() {
       return (
         <div className="d-flex">
           <NavLink className="nav-link" to="/profile">
-            Hello ! {userProfile.name}
+            {userProfile.name}
           </NavLink>
           <button
             className="nav-link btn btn-primary"
-            style={{ background: "#fff", border: "none" }}
+            style={{ background: "#fff", border: "none", marginLeft: "20px" }}
             onClick={() => {
-              settings.eraseCookie(ACCESSTOKEN, 0);
-              localStorage.removeItem(USER_LOGIN);
-              localStorage.removeItem(ACCESSTOKEN);
-              //Sau khi đăng xuất xong chuyển về trang login đồng thời reload lại page clear redux
+              // settings.eraseCookie(ACCESSTOKEN, 0);
+              // localStorage.removeItem(USER_LOGIN);
+              // localStorage.removeItem(ACCESSTOKEN);
               window.location.href = "/login";
             }}
           >
@@ -31,9 +30,12 @@ export default function HeaderHome() {
       );
     }
     return (
-      <NavLink className="nav-link" to="/login">
-        Login
-      </NavLink>
+      <div className="d-flex">
+        <NavLink className="nav-link" style={{ marginRight: 20 }} to="/login">
+          Login
+        </NavLink>
+        <NavLink to="/register">Register </NavLink>
+      </div>
     );
   };
   return (
@@ -62,9 +64,6 @@ export default function HeaderHome() {
               </span>
             </div>
             <div className="login">{renderLogin()}</div>
-            <div className="register">
-              <NavLink to="/register">Register </NavLink>
-            </div>
           </div>
         </div>
       </div>

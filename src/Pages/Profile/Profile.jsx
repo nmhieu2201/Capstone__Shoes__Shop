@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { getProfileApi } from "../../redux/productReducer/userReducer";
 export default function Profile() {
@@ -31,14 +31,11 @@ export default function Profile() {
         ),
     }),
     onSubmit: (values) => {
-      // const action = getProfileApi(values);
-      // dispatch(action);
+      dispatch(getProfileApi(values));
     },
   });
-  useEffect(() => {
-    const action = getProfileApi();
-    dispatch(action);
-  }, []);
+  const { userProfile } = useSelector((state) => state.userReducer);
+  
   return (
     <div className="profile-form">
       <h3 className="profile-title">Profile</h3>
@@ -46,7 +43,11 @@ export default function Profile() {
         <div className="row">
           <div className="img">
             <img
-              src="https://i.pravatar.cc"
+              src={
+                userProfile.picture?.data.url
+                  ? userProfile.content?.avatar
+                  : "Avatar"
+              }
               style={{ width: 100 }}
               className="w-100"
               alt="..."
@@ -62,6 +63,7 @@ export default function Profile() {
                     name={"email"}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    value={userProfile.email}
                   />
                 </div>
                 <div className="form-group">
@@ -71,6 +73,7 @@ export default function Profile() {
                     name={"name"}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    value={userProfile?.content?.name}
                   />
                 </div>
               </div>
@@ -82,6 +85,7 @@ export default function Profile() {
                     name={"password"}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    value={userProfile?.content?.password}
                   />
                 </div>
                 <div className="form-group">
@@ -91,6 +95,7 @@ export default function Profile() {
                     name={"phone"}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    value={userProfile?.content?.phone}
                   />
                 </div>
               </div>
