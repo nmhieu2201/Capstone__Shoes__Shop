@@ -79,7 +79,7 @@ export default function Register() {
                 },
               ]}
             >
-              <Input placeholder="Please input your email" />
+              <Input placeholder="Please input your email" className="" />
             </Form.Item>
             <Form.Item
               {...formItemLayout}

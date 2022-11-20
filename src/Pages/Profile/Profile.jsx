@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { getProfileApi } from "../../redux/productReducer/userReducer";
+import { getProfileUpdateApi } from "../../redux/productReducer/userReducer";
 export default function Profile() {
   const dispatch = useDispatch();
   const form = useFormik({
@@ -29,13 +30,28 @@ export default function Profile() {
           /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/,
           "Phone is not valid!"
         ),
+      gender: yup.boolean().required('please select a gender'),
     }),
+    // validationSchema: yup.object().shape({
+    //   email: yup.string().required('Vui lòng nhập vào email !').email('Email không đúng định dạng !'),
+    //   phone: yup.number().required('Vui lòng nhập vào phone !').typeError('Phone phải là số !'),
+    //   name: yup.string().required('Vui lòng nhập vào name !'),
+    //   password: yup.string().required('Vui lòng nhập vào password !').min(6, 'Password từ 6 - 20 ký tự !').max(20, 'Password từ 6 - 20 ký tự !'),
+    //   gender: yup.boolean().required('Vui lòng chọn gender !'),
+    // }),
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
-      dispatch(getProfileApi(values));
+      console.log(values);
+      const action = getProfileUpdateApi(values);
+      dispatch(action);
     },
+    // onSubmit: (values) => {
+    //   dispatch(getProfileApi(values));
+    // },
   });
   const { userProfile } = useSelector((state) => state.userReducer);
-  
+
   return (
     <div className="profile-form">
       <h3 className="profile-title">Profile</h3>
@@ -65,6 +81,11 @@ export default function Profile() {
                     onBlur={form.handleBlur}
                     value={userProfile.email}
                   />
+                  {form.errors.email ? (
+                    <p className="text text-danger">{form.errors.email}</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="form-group">
                   <p className="form-label"> Name</p>
@@ -75,6 +96,11 @@ export default function Profile() {
                     onBlur={form.handleBlur}
                     value={userProfile?.content?.name}
                   />
+                  {form.errors.name ? (
+                    <p className="text text-danger">{form.errors.name}</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="col-6">
@@ -87,6 +113,11 @@ export default function Profile() {
                     onBlur={form.handleBlur}
                     value={userProfile?.content?.password}
                   />
+                  {form.errors.password ? (
+                    <p className="text text-danger">{form.errors.password}</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="form-group">
                   <p className="form-label">Phone</p>
@@ -97,17 +128,104 @@ export default function Profile() {
                     onBlur={form.handleBlur}
                     value={userProfile?.content?.phone}
                   />
+                  {form.errors.phone ? (
+                    <p className="text text-danger">{form.errors.phone}</p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
+            </div>
+            <div className="form-group">
+              <p className="form-label">Gender</p>
+              <label htmlFor="male">Male</label>
+              <input
+                className="mx-2"
+                type="radio"
+                id="male"
+                name="gender"
+                value={true}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+              />
+              <label htmlFor="female">Female</label>
+              <input
+                className="mx-2"
+                type="radio"
+                id="female"
+                name="gender"
+                value={false}
+                onChange={form.handleChange}
+                onBlur={form.handleBlur}
+              />
+              {form.errors.gender ? (
+                <p className="text text-danger">{form.errors.gender}</p>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
         <div
-          className="button text-right"
+          className="button text-right mt-2"
           style={{ display: "flex", justifyContent: "flex-end" }}
         >
           <div className="btn btn-success">Update</div>
         </div>
+        <span className="history">Order History</span>
+        <span className="favorite">Favorite</span>
+        <p className="history-order">+ Orders have been placed on </p>
+        <table className="table">
+          <thead>
+            <tr className="text-center">
+              <th>Id</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quanlity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="text-center">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination justify-content-end">
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">»</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </form>
     </div>
   );

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { message } from "antd";
-import {addShoesAction } from "../../redux/cartReducer/cartReducer";
+import { addShoesAction } from "../../redux/cartReducer/cartReducer";
 import {
   getProduceDetailApiById,
   addQuantityAction,
@@ -66,8 +66,8 @@ export default function Detail() {
               onClick={() => {
                 const action = addShoesAction(productDetail);
                 dispatch(action);
-                message.success(`Success added ${productDetail.name} to cart!`)
-
+                message.success(`Success added ${productDetail.name} to cart!`);
+                console.log(action);
               }}
             >
               Add to cart

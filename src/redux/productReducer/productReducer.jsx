@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { http } from "../../util/config";
+import { http,settings } from "../../util/config";
 const initialState = {
   arrProduct: [],
+  searchProduct: [],
   productDetail: {},
+  cartList: settings.setStorageJson('cart') || [],
+
 };
 
 const productReducer = createSlice({
@@ -23,6 +26,13 @@ const productReducer = createSlice({
         state.productDetail.cartQuantity -= 1;
       }
     },
+    addItemToListCart:(state, action) => {
+      state.cartList.push(action.payload);
+      settings.getStorageJson('cart',state.cartList)
+    },
+    searchProductAction: (state, action) => {
+      state.searchProduct = action.payload
+  },
   },
 });
 
@@ -31,6 +41,7 @@ export const {
   getProductDetailAction,
   addQuantityAction,
   decreaseQuantity,
+  searchProductAction,
 } = productReducer.actions;
 
 export default productReducer.reducer;
@@ -48,3 +59,11 @@ export const getProduceDetailApiById = (id) => {
     dispatch(getProductDetailAction({...result.data.content, cartQuantity: 1}));
   };
 };
+export const searchProductApi = (keyword) => {
+  return async dispatch => {
+      let result = await http.get('api/Product?keyword=' + keyword)
+      let prodSearch = result.data.content
+      const action = searchProductAction(prodSearch);
+      dispatch(action)
+  }
+}

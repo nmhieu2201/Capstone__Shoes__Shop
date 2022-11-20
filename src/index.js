@@ -3,12 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import "./index.scss";
 import "antd/dist/antd.min.css";
-import {
-  unstable_HistoryRouter as HistoryRouter,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { unstable_HistoryRouter as HistoryRouter, Navigate, Route, Routes, } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { store } from "./redux/configStore";
 import HomeTemplate from "./Template/HomeTemplate/HomeTemplate";

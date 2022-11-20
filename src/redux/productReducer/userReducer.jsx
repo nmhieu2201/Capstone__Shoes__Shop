@@ -19,10 +19,13 @@ const userReducer = createSlice({
     setProfileAction: (state, action) => {
       state.userProfile = action.payload;
     },
+    getProfileUpdateAction: (state, action) => {
+      state.userProfileUpdate = action.payload;
+    },
   },
 });
 
-export const { loginAction, setProfileAction } = userReducer.actions;
+export const { loginAction, setProfileAction,getProfileUpdateAction } = userReducer.actions;
 
 export default userReducer.reducer;
 ///async action
@@ -52,4 +55,11 @@ export const loginFacebookApi = (data) => {
     // settings.setStorage(ACCESSTOKEN, result.data.content.accessToken);
     // settings.setCookie(ACCESSTOKEN, result.data.content.accessToken, 30);
   };
+};
+export const getProfileUpdateApi = (userProfileUpdate) => {
+  return async dispatch => {
+    const result = await http.post('/api/Users/updateProfile', userProfileUpdate);
+    const action = getProfileUpdateAction(result.data.content);
+    dispatch(action);
+  }
 };
