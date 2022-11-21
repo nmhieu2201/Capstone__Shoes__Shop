@@ -18,9 +18,9 @@ export default function HeaderHome() {
             className="nav-link btn btn-primary"
             style={{ background: "#fff", border: "none", marginLeft: "20px" }}
             onClick={() => {
-              // settings.eraseCookie(ACCESSTOKEN, 0);
-              // localStorage.removeItem(USER_LOGIN);
-              // localStorage.removeItem(ACCESSTOKEN);
+              settings.eraseCookie(ACCESSTOKEN, 0);
+              localStorage.removeItem(USER_LOGIN);
+              localStorage.removeItem(ACCESSTOKEN);
               window.location.href = "/login";
             }}
           >

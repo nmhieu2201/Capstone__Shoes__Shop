@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { getProfileApi } from "../../redux/productReducer/userReducer";
 import { getProfileUpdateApi } from "../../redux/productReducer/userReducer";
+import { NavLink } from "react-router-dom";
 export default function Profile() {
   const dispatch = useDispatch();
   const form = useFormik({
@@ -200,29 +201,29 @@ export default function Profile() {
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-end">
             <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
+              <NavLink className="page-link" to="#" aria-label="Previous">
                 <span aria-hidden="true">«</span>
-              </a>
+              </NavLink>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <NavLink className="page-link" to="#">
                 1
-              </a>
+              </NavLink>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <NavLink className="page-link" to="#">
                 2
-              </a>
+              </NavLink>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#">
+              <NavLink className="page-link" to="#">
                 3
-              </a>
+              </NavLink>
             </li>
             <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
+              <NavLink className="page-link" to="#" aria-label="Next">
                 <span aria-hidden="true">»</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
