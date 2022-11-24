@@ -9,7 +9,7 @@ export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductApi());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="home-component">
       <div className="carousel-home">

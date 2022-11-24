@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { message } from "antd";
 import { useDispatch, useSelector } from "react-redux";

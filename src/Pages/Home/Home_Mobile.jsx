@@ -9,7 +9,7 @@ export default function Home_Mobile() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductApi());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="home-component-m">
       <div className="carousel-home">
